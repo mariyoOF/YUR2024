@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "admin.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,7 +16,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_Start_clicked(); //переход на Admin
+
 private:
     Ui::MainWindow *ui;
+    admin *uAdmin;//ссылка на окно Admin
 };
 #endif // MAINWINDOW_H
