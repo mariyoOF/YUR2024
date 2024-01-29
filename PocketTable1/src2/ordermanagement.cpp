@@ -3,7 +3,7 @@
 #include "model/productdb.h"
 #include <sstream>
 
-OrderManagement::OrderManagement(QWidget *parent) :
+OrderManagement::OrderManagement(QWidget *parent) : //класс заказ.менеджер
   QWidget(parent),
   ui(new Ui::OrderManagement)
 {
@@ -16,12 +16,12 @@ OrderManagement::OrderManagement(QWidget *parent) :
   on_load();
 }
 
-OrderManagement::~OrderManagement()
+OrderManagement::~OrderManagement() //стандарт конструктор
 {
   delete ui;
 }
 
-void OrderManagement::on_load() {
+void OrderManagement::on_load() { //
   vector<Order> orders = PRODUCT_DB.orders();
 
   ui->table->setRowCount(0);
@@ -29,9 +29,9 @@ void OrderManagement::on_load() {
     int index = ui->table->rowCount();
     ui->table->insertRow(index);
 
-    ui->table->setItem(index, 0, new QTableWidgetItem(QString::fromStdString(order.date)));
+    ui->table->setItem(index, 0, new QTableWidgetItem(QString::fromStdString(order.date))); //выцепляем дату заказа
 
-    stringstream sstr;
+    stringstream sstr; //работаем в id заказа
     for (auto id : order.product_ids) {
       sstr << id << "  ";
     }
@@ -42,10 +42,10 @@ void OrderManagement::on_load() {
   }
 }
 
-vector<Order> OrderManagement::selected_orders() {
+vector<Order> OrderManagement::selected_orders() { //функция для обращений к БД
   QList<QTableWidgetItem*> selectedItems = ui->table->selectedItems();
-  set<int> selected_rows;
-  vector<Order> orders;
+  set<int> selected_rows; //выбираем строку
+  vector<Order> orders;   //с нужным заказом
 
   for (auto item : selectedItems) {
     selected_rows.insert(item->row());
@@ -54,21 +54,20 @@ vector<Order> OrderManagement::selected_orders() {
   for (auto row : selected_rows) {
     auto date = ui->table->item(row, 0)->text().toStdString();
 
-    auto it_order = find_if(orders.begin(), orders.end(), [=](Order order){
-        return order.date == date;
+    auto it_order = find_if(orders.begin(), orders.end(), [=](Order order){ //при выполнении оформления и проверки заказа
+        return order.date == date; //возвращаем его дату
     });
 
-    if (it_order == orders.end()) {
+    if (it_order == orders.end()) { //завершаем оформление заказа
       Order order;
       order.date = date;
       orders.push_back(order);
     }
   }
-
   return orders;
 }
 
-void OrderManagement::on_remove() {
+void OrderManagement::on_remove() { //удаляем заказ из основной БД
   vector<Order> orders = selected_orders();
 
   for (auto order : orders) {
@@ -77,7 +76,7 @@ void OrderManagement::on_remove() {
   on_load();
 }
 
-void OrderManagement::on_sell() {
+void OrderManagement::on_sell() { //добавляем в "совершенные" заказы
   vector<Order> orders = selected_orders();
 
   for (auto order : orders) {

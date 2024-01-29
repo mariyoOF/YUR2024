@@ -1,10 +1,4 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2021-07-16T07:32:49
-#
-#-------------------------------------------------
-
-QT       += core gui sql
+QT       += core gui sql      #подключаем язык SQL
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

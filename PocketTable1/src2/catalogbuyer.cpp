@@ -25,20 +25,20 @@ CatalogBuyer::~CatalogBuyer() {
   delete ui;
 }
 
-void CatalogBuyer::on_login() {
+void CatalogBuyer::on_login() { //кнопка "Войти"
   AuthWidget* auth = new AuthWidget(nullptr);
   connect(auth, SIGNAL(auth_ok(User::Role)), SLOT(on_auth_ok(User::Role)));
 
   auth->show();
 }
 
-void CatalogBuyer::on_auth_ok(User::Role role) {
+void CatalogBuyer::on_auth_ok(User::Role role) { //функция проверки на "Администратора"
   this->hide();
   CatalogManager *catalog = new CatalogManager(role, nullptr);
   catalog->show();
 }
 
-void CatalogBuyer::on_updated() {
+void CatalogBuyer::on_updated() { //функция для работы с товарам в таблице
   vector<Product> products = PRODUCT_DB.products();
 
   ui->table->setRowCount(0);

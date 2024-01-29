@@ -2,10 +2,15 @@
 #define DBFACADE_H
 
 #include <QObject>
-#include <QtSql/QtSql>
+#include <QtSql/QtSql> //подключаем библеотекеу QtSQL
 #include <exception>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlRecord>
+#include <QtSql/QSqlQuery>
 
-class DBFacade : public QObject {
+//class QSqlTableModel;
+
+class DBFacade : public QObject { //класс Фасад для работы с интерфейсом+БД
     Q_OBJECT
 public:
     explicit DBFacade(QString databasename,
@@ -19,8 +24,9 @@ protected:
     QString qs(std::string);
                 //!< quote string
 
-    QSqlDatabase m_db;
-    QSqlQuery *m_query;
+    QSqlDatabase m_db; //генератор БД
+    QSqlQuery *m_query; //запросник данных БД
+    //QSqlTableModel m_model;
 };
 
 class OpenDBException: public std::exception {

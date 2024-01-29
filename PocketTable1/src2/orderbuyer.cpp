@@ -14,11 +14,11 @@ OrderBuyer::OrderBuyer(QWidget *parent) :
   connect(ui->remove, SIGNAL(clicked()), SLOT(remove_product()));
 }
 
-OrderBuyer::~OrderBuyer() {
+OrderBuyer::~OrderBuyer() { //стандарт конструктор
   delete ui;
 }
 
-void OrderBuyer::load(set<string> additional_products) {
+void OrderBuyer::load(set<string> additional_products) { //загрузка новыйх данных в БД проданных товаров
   for (auto product : additional_products) {
     product_articles.insert(product);
   }
@@ -45,9 +45,6 @@ set<string> OrderBuyer::current_order() {
 }
 
 void OrderBuyer::create_order() {
-  /*QString email = ui->email->text();
-  if (email.contains('.') == false || email.contains('@') == false)
-    return;*/
 
   QString date_string = QDate::currentDate().toString(Qt::ISODate);
   date_string.truncate(10);
@@ -64,7 +61,6 @@ void OrderBuyer::create_order() {
 
 
   PRODUCT_DB.add_order(date_string.toStdString(),
-                       /*email.toStdString(),*/
                        products);
 
   hide();

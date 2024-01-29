@@ -9,7 +9,6 @@ SalesReport::SalesReport(QWidget *parent) :
 
   connect(ui->calc, SIGNAL(clicked()), SLOT(on_calc()));
 
-  //QRegExpValidator* dateValidator = new QRegExpValidator(QRegExp("20\\d{2}\\.[01]?\\d\\.[0123]?\\d"), this);
   //ui->start->setValidator(dateValidator);
   //ui->end->setValidator(dateValidator);
 }

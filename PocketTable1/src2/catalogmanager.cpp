@@ -8,7 +8,7 @@ CatalogManager::CatalogManager(User::Role role, QWidget *parent) :
   ui(new Ui::CatalogManager) {
   ui->setupUi(this);
 
-  bool superEnabled = role == User::Role::CompanyManager;
+  bool superEnabled = role == User::Role::CompanyManager; //проверка на "Администратора"
 
   ui->users_control->setEnabled(superEnabled);
   ui->report->setEnabled(superEnabled);
@@ -19,16 +19,16 @@ CatalogManager::CatalogManager(User::Role role, QWidget *parent) :
   connect(ui->report, SIGNAL(clicked()), SLOT(on_report()));
   connect(ui->orders, SIGNAL(clicked()), SLOT(on_order_management()));
 
-  users = new Users(nullptr);
+  users = new Users(nullptr); //добавление пользователя
   users->hide();
 
-  add_product = new AddProduct(nullptr);
+  add_product = new AddProduct(nullptr); //добавление продукта
   add_product->hide();
 
-  order_management = new OrderManagement(nullptr);
+  order_management = new OrderManagement(nullptr); //формирование заказа
   order_management->hide();
 
-  report = new SalesReport(nullptr);
+  report = new SalesReport(nullptr); //создание отчета
   report->hide();
 
   connect(add_product, SIGNAL(product(Product)), SLOT(on_product_added(Product)));
@@ -37,22 +37,22 @@ CatalogManager::CatalogManager(User::Role role, QWidget *parent) :
   on_updated();
 }
 
-CatalogManager::~CatalogManager() {
+CatalogManager::~CatalogManager() {//стандартный конструктор класса
   delete ui;
 }
 
-void CatalogManager::on_user_management() {
+void CatalogManager::on_user_management() { //кнопка "Упраление пользователями"
   users->show();
 }
 
-void CatalogManager::on_report() {
+void CatalogManager::on_report() { //кнопка "посмотреть отчеты"
   report->show();
 }
 
-void CatalogManager::on_product_remove() {
+void CatalogManager::on_product_remove() { //функция удаления товаров
   QList<QTableWidgetItem*> selectedItems = ui->table->selectedItems();
-  set<int> selected_rows;
-  set<QString> removed_articles;
+  set<int> selected_rows; //выбираем сторку
+  set<QString> removed_articles; //удаляем артикль
 
   for (auto item : selectedItems) {
     selected_rows.insert(item->row());
@@ -64,25 +64,25 @@ void CatalogManager::on_product_remove() {
   }
 
   for (auto article : removed_articles) {
-    PRODUCT_DB.remove_product(article.toStdString());
+    PRODUCT_DB.remove_product(article.toStdString()); //зачищаем артикль и данные в БД
   }
 }
 
-void CatalogManager::on_product_add() {
+void CatalogManager::on_product_add() { //кнопка "добавить" товар
   add_product->show();
 }
 
-void CatalogManager::on_order_management() {
+void CatalogManager::on_order_management() { //кнопка "обработать заказ"
   order_management->show();
 }
 
-void CatalogManager::on_product_added(Product product) {
+void CatalogManager::on_product_added(Product product) { //добавляем товар по артиклю в файловую БД
   Product other;
   if (false == PRODUCT_DB.product_by_article(product.article, other))
     PRODUCT_DB.add_product(product);
 }
 
-void CatalogManager::on_updated() {
+void CatalogManager::on_updated() { //обновляем данных в БД
   vector<Product> products = PRODUCT_DB.products();
 
   ui->table->setRowCount(0);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>259</width>
-    <height>148</height>
+    <width>292</width>
+    <height>158</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -33,6 +33,42 @@
      </property>
     </widget>
    </item>
+   <item row="3" column="3">
+    <widget class="QPushButton" name="enter">
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Войти</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QLineEdit" name="login">
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>login</string>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="3">
     <widget class="QLineEdit" name="password">
      <property name="font">
@@ -53,42 +89,6 @@
      </property>
      <property name="text">
       <string>Назад</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="label">
-     <property name="font">
-      <font>
-       <family>Comic Sans MS</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>login</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3">
-    <widget class="QLineEdit" name="login">
-     <property name="font">
-      <font>
-       <family>Comic Sans MS</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="3">
-    <widget class="QPushButton" name="enter">
-     <property name="font">
-      <font>
-       <family>Comic Sans MS</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Войти</string>
      </property>
     </widget>
    </item>

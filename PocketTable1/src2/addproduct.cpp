@@ -1,6 +1,6 @@
 #include "addproduct.h"
 #include "ui_addproduct.h"
-#include <QIntValidator>
+#include <QIntValidator> //валидатор для проверки соответствя данных
 
 AddProduct::AddProduct(QWidget *parent) :
   QWidget(parent),

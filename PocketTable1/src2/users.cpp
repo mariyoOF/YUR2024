@@ -26,11 +26,11 @@ void Users::on_remove() {
   set<int> selected_rows;
   set<QString> removed_users;
 
-  for (auto item : selectedItems) {
+  for (auto item : selectedItems) { //обращаемся к сторкам таблицы
     selected_rows.insert(item->row());
   }
 
-  for (auto row : selected_rows) {
+  for (auto row : selected_rows) { //удаляем пользователя по логину
     auto login = ui->table->item(row, 0)->text();
     removed_users.insert(login);
   }
@@ -46,14 +46,14 @@ void Users::on_remove() {
   }
 }
 
-void Users::on_add() {
+void Users::on_add() { //добавляем пользователя и его данные
   QString login = ui->login->text();
   QString password = ui->password->text();
 
-  if (login.isEmpty() || password.isEmpty())
+  if (login.isEmpty() || password.isEmpty()) //
     return;
 
-  if (PRODUCT_DB.is_login_busy(login))
+  if (PRODUCT_DB.is_login_busy(login)) //если логин занят
     return;
 
   bool isSuper = ui->isSuper->isChecked();
@@ -69,7 +69,7 @@ void Users::on_add() {
   PRODUCT_DB.add_user(User(login.toStdString(), password.toStdString(), role));
 }
 
-void Users::on_updated() {
+void Users::on_updated() { //обновление данных БД пользователей
   vector<User> users = PRODUCT_DB.users();
 
   ui->table->setRowCount(0);
